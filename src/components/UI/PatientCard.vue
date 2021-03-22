@@ -59,14 +59,15 @@
 <style scoped>
   .card {
     width: 20rem;
-    margin: 1rem;
+    margin: 2rem;
     padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 1rem;
-    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 8px 1rem rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    background-color: white;
   }
 
   .img-box {

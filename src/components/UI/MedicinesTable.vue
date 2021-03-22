@@ -34,11 +34,18 @@
 <style scoped>
   table {
     border-collapse: collapse;
+    box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.3);
+  }
+
+  th {
+    background-color: #27a4f2;
+    color: white;
+    font-size: 1.2rem;
   }
 
   th,
   td {
-    padding: 1rem;
+    padding: 1rem 2rem;
     text-align: start;
   }
 

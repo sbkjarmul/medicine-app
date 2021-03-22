@@ -1,16 +1,19 @@
 <template>
   <the-header>
-    <button @click="setView('patients')">Patients</button>
-    <button @click="setView('medicines')">Medicines</button>
+    <h3>MEDICINE APP</h3>
+    <div>
+      <button @click="setView('patients')">Patients</button>
+      <button @click="setView('medicines')">Medicines</button>
+    </div>
   </the-header>
-  <div v-if="view === 'patients'">
+  <div class="content-box" v-if="view === 'patients'">
     <patient-card
       v-for="patient in patients"
       :key="patient.id"
       :patient="patient"
     ></patient-card>
   </div>
-  <div v-else-if="view === 'medicines'">
+  <div class="content-box" v-else-if="view === 'medicines'">
     <medicines-table></medicines-table>
   </div>
 </template>
@@ -70,5 +73,24 @@
 
   body {
     background-color: #f0f1f2;
+  }
+
+  .content-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2.5rem;
+  }
+  button {
+    border: none;
+    background: transparent;
+    padding: 1rem;
+    text-transform: uppercase;
+  }
+
+  button:focus {
+    outline: none;
+    border-bottom: 2px solid #57b7f2;
   }
 </style>
