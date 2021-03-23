@@ -1,5 +1,5 @@
 <template>
-  <table>
+  <table :class="size">
     <thead>
       <tr>
         <th>Name</th>
@@ -23,33 +23,57 @@
 
 <script>
   export default {
-    computed: {
-      medicines() {
-        return this.$store.state.medicines;
+    props: {
+      medicines: {
+        type: Array,
+      },
+      size: {
+        type: String,
       },
     },
   };
 </script>
 
 <style scoped>
-  table {
+  table.small,
+  table.big {
     border-collapse: collapse;
+  }
+  table.big {
     box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.3);
   }
 
-  th {
+  table.big th {
     background-color: #27a4f2;
     color: white;
     font-size: 1.2rem;
   }
 
-  th,
-  td {
+  table.big th,
+  table.big td {
     padding: 1rem 2rem;
     text-align: start;
   }
 
-  tr:nth-child(even) {
+  table.small th {
+    font-weight: 400;
+    border-bottom: 1px solid rgb(36, 36, 36);
+    color: black;
+    font-size: 0.9rem;
+  }
+
+  table.small th,
+  table.small td {
+    padding: 0.5rem 1rem;
+    text-align: start;
+    font-size: 0.8rem;
+  }
+
+  table.big tr:nth-child(even) {
     background: rgba(0, 0, 0, 0.1);
+  }
+
+  table.small tr {
+    border-bottom: 1px solid rgb(196, 196, 196);
   }
 </style>
