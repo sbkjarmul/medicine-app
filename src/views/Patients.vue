@@ -2,7 +2,7 @@
   <div class="content-box">
     <div class="filter-box">
       <filter-button name="Over 30" @click="filterTable('30')"></filter-button>
-      <filter-button name="Men" @click="filterTable('men')"></filter-button>
+      <filter-button name="Male" @click="filterTable('men')"></filter-button>
       <filter-button name="All" @click="filterTable('all')"></filter-button>
     </div>
 
