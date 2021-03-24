@@ -1,81 +1,40 @@
 <template>
   <the-header>
-    <h3>MEDICINE APP</h3>
-    <div>
-      <button @click="setView('patients')">Patients</button>
-      <button @click="setView('medicines')">Medicines</button>
-    </div>
+    <h3 @click="loadView('/')">MEDICINE APP</h3>
+    <nav>
+      <router-link to="/">Home</router-link>
+      <router-link to="/patients">Patients</router-link>
+      <router-link to="/medicines">Medicines</router-link>
+    </nav>
   </the-header>
-
-  <div class="content-box" v-if="view === 'patients'">
-    <!-- <patient-card
-      v-for="patient in patients"
-      :key="patient.id"
-      :patient="patient"
-    ></patient-card> -->
-    <patient-card
-      :patient="patient"
-      v-if="showCard"
-      @close-card="closeCard"
-    ></patient-card>
-    <patients-table :patients="patients" @patient="getPatient"></patients-table>
-  </div>
-  <div class="content-box" v-else-if="view === 'medicines'">
-    <medicines-table :medicines="medicines" size="big"></medicines-table>
-  </div>
+  <router-view></router-view>
 </template>
 
 <script>
   import TheHeader from './components/UI/TheHeader.vue';
-  import PatientCard from './components/UI/PatientCard.vue';
-  import MedicinesTable from './components/UI/MedicinesTable.vue';
-  import PatientsTable from './components/UI/PatientsTable.vue';
 
   export default {
     data() {
-      return {
-        view: 'patients',
-        patient: {},
-        showCard: 0,
-      };
+      return {};
     },
+
     components: {
       TheHeader,
-      PatientCard,
-      MedicinesTable,
-      PatientsTable,
     },
+
     methods: {
+      loadView(path) {
+        this.$router.push(path);
+      },
+
       getData() {
-        // this.$store.commit('getPatients');
-        this.$store.commit('getMedicines');
+        this.$store.dispatch('loadMedicines');
         this.$store.dispatch('loadPatients');
       },
-      setView(view) {
-        if (view === 'patients') {
-          this.view = 'patients';
-        } else if (view === 'medicines') {
-          this.view = 'medicines';
-        }
-      },
-      getPatient(patient, status) {
-        this.patient = patient;
-        this.showCard = status;
-      },
-      closeCard(status) {
-        this.showCard = status;
-      },
     },
+
     created() {
       this.getData();
-    },
-    computed: {
-      patients() {
-        return this.$store.state.patients;
-      },
-      medicines() {
-        return this.$store.state.medicines;
-      },
     },
   };
 </script>
@@ -94,25 +53,47 @@
   }
 
   body {
-    background-color: #f0f1f2;
+    background-color: #ffffff;
   }
 
   .content-box {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     padding-top: 2.5rem;
   }
-  button {
-    border: none;
-    background: transparent;
-    padding: 1rem;
-    text-transform: uppercase;
+
+  nav {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  button:focus {
+  a {
+    box-sizing: border-box;
+    color: rgb(90, 90, 90);
+    border: none;
+    background: transparent;
+    padding: 0 1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  a:focus,
+  a.router-link-active {
     outline: none;
-    border-bottom: 2px solid #57b7f2;
+    border-bottom: 3px solid #f2c36b;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    padding-top: 2px;
   }
 </style>

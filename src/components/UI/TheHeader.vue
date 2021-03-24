@@ -7,9 +7,9 @@
 <style scoped>
   header {
     width: 100%;
-    height: 5rem;
-    padding-right: 5rem;
-    padding-left: 5rem;
+    height: 4rem;
+    padding-right: 10rem;
+    padding-left: 10rem;
 
     color: #57b7f2;
     background-color: white;
@@ -19,5 +19,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
   }
 </style>

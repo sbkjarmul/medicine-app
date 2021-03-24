@@ -3,8 +3,8 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Unit</th>
-        <th>Strength</th>
+        <th class="center">Unit</th>
+        <th class="center">Strength</th>
         <th>Form</th>
         <th>Expiration Date</th>
       </tr>
@@ -12,8 +12,8 @@
     <tbody>
       <tr v-for="medicine in medicines" :key="medicine.id">
         <td>{{ medicine.medicationName }}</td>
-        <td>{{ medicine.unit }}</td>
-        <td>{{ medicine.strength }}</td>
+        <td class="center">{{ medicine.unit }}</td>
+        <td class="center">{{ medicine.strength }}</td>
         <td>{{ medicine.form }}</td>
         <td>{{ medicine.expDate }}</td>
       </tr>
@@ -27,7 +27,12 @@
       medicines: {
         type: Array,
       },
+
       size: {
+        type: String,
+      },
+
+      filter: {
         type: String,
       },
     },
@@ -39,6 +44,7 @@
   table.big {
     border-collapse: collapse;
   }
+
   table.big {
     box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.3);
   }
@@ -46,13 +52,30 @@
   table.big th {
     background-color: #27a4f2;
     color: white;
-    font-size: 1.2rem;
+    font-weight: 400;
+    font-size: 0.9rem;
+  }
+
+  table.big td {
+    font-size: 0.8rem;
   }
 
   table.big th,
   table.big td {
-    padding: 1rem 2rem;
+    padding: 0.5rem 1rem;
     text-align: start;
+    min-width: 10rem;
+  }
+
+  table.big th:first-child,
+  table.big td:first-child {
+    padding: 0.5rem 2rem;
+  }
+
+  table.big th.center,
+  table.big td.center {
+    text-align: center;
+    min-width: 7.5rem;
   }
 
   table.small th {

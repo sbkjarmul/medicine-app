@@ -1,5 +1,5 @@
 import { createStore } from 'vuex';
-import axios from 'axios';
+// import axios from 'axios';
 
 const store = createStore({
   state() {
@@ -19,19 +19,27 @@ const store = createStore({
     //     state.patients = response.data;
     //   });
     // },
-    getMedicines(state) {
-      axios.get(state.mUrl).then((response) => {
-        state.medicines = response.data;
-      });
+    setMedicines(state, payload) {
+      state.medicines = payload;
     },
+    // getMedicines(state) {
+    //   axios.get(state.mUrl).then((response) => {
+    //     state.medicines = response.data;
+    //   });
+    // },
   },
   actions: {
     async loadPatients(context) {
       const response = await fetch('https://cerber.pixel.com.pl/api/patients');
-
       const responseData = await response.json();
 
       context.commit('setPatients', responseData);
+    },
+    async loadMedicines(context) {
+      const response = await fetch('https://cerber.pixel.com.pl/api/medicine');
+      const responseData = await response.json();
+
+      context.commit('setMedicines', responseData);
     },
   },
 });

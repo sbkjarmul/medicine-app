@@ -5,6 +5,7 @@
         <div class="img-box">
           <i class="fas fa-user-injured"></i>
         </div>
+
         <div class="text-box">
           <h1>{{ patient.name }} {{ patient.lastName }}</h1>
           <p class="gender">{{ patient.gender }}</p>
@@ -17,10 +18,12 @@
           </p>
           <p><span>Age:</span> {{ patient.age }}</p>
         </div>
+
         <button @click="showMedicines" class="show-medicine-btn">
-          Show medicines
+          {{ showButtonName }}
         </button>
       </div>
+
       <div class="med-box" v-if="show">
         <p>Patient medicines:</p>
         <medicines-table :medicines="medicines" size="small"></medicines-table>
@@ -30,32 +33,41 @@
 </template>
 
 <script>
-  import MedicinesTable from './MedicinesTable.vue';
+  import MedicinesTable from '../medicines/MedicinesTable.vue';
   export default {
     components: {
       MedicinesTable,
     },
+
     data() {
       return {
         show: 0,
       };
     },
+
     props: {
       patient: {
         type: Object,
       },
     },
+
     methods: {
       showMedicines() {
         this.show = !this.show;
       },
+
       closeCard(e) {
         if (e.target.className === 'container') {
           this.$emit('close-card', 0);
         }
       },
     },
+
     computed: {
+      showButtonName() {
+        return this.show ? 'Hide medicines' : 'Show medicines';
+      },
+
       medicines() {
         const medicines = this.$store.state.medicines;
         const patientMedicines = medicines.filter((medicine) => {
@@ -91,7 +103,7 @@
 
   .card {
     position: fixed;
-    top: 10rem;
+    top: 5rem;
     width: auto;
     margin: 2rem;
     padding: 2rem;
@@ -178,5 +190,10 @@
 
   .show-medicine-btn:hover {
     background-color: #6dccf2;
+    outline: none;
+  }
+
+  .show-medicine-btn:focus {
+    outline: none;
   }
 </style>
