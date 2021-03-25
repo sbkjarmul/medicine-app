@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="medicine in medicines" :key="medicine.id">
+      <tr v-for="medicine in medicinesList" :key="medicine.id">
         <td>{{ medicine.medicationName }}</td>
         <td class="center">{{ medicine.unit }}</td>
         <td class="center">{{ medicine.strength }}</td>
@@ -34,6 +34,48 @@
 
       filter: {
         type: String,
+      },
+    },
+    computed: {
+      medicinesList() {
+        const medicines = this.medicines;
+        const patients = this.$store.state.patients;
+
+        if (this.filter === '30') {
+          const patientMedicines = medicines.filter((medicine) => {
+            let forPatient = 0;
+
+            medicine.patientIds.forEach((patientId) => {
+              patients.forEach((patient) => {
+                if (patientId === patient.id && patient.age > 30) {
+                  forPatient++;
+                }
+              });
+            });
+
+            return forPatient > 0;
+          });
+
+          return patientMedicines;
+        } else if (this.filter === 'men') {
+          const patientMedicines = medicines.filter((medicine) => {
+            let forPatient = 0;
+
+            medicine.patientIds.forEach((patientId) => {
+              patients.forEach((patient) => {
+                if (patientId === patient.id && patient.gender === 'male') {
+                  forPatient++;
+                }
+              });
+            });
+
+            return forPatient > 0;
+          });
+
+          return patientMedicines;
+        } else {
+          return medicines;
+        }
       },
     },
   };

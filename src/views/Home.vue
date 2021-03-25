@@ -31,7 +31,7 @@
     background-size: cover;
     background-position: center;
 
-    padding: 12.5rem 10rem;
+    padding: 10rem 10rem;
     justify-content: flex-start;
     align-items: flex-start;
   }
